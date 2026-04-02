@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "@tanstack/react-router";
-import { ArrowLeft, Info, Loader2, RefreshCw } from "lucide-react";
+import { ArrowLeft, ClipboardList, Loader2, RefreshCw } from "lucide-react";
 import { useEffect } from "react";
 import { useAuth } from "../AuthContext";
-
-const CPX_APP_ID = "YOUR_APP_ID";
 
 export default function Survey() {
   const router = useRouter();
@@ -28,10 +26,8 @@ export default function Survey() {
     );
   }
 
-  const surveyUrl = `https://offers.cpx-research.com/index.php?app_id=${CPX_APP_ID}&ext_user_id=${profile.userId}`;
-
   return (
-    <div className="h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-brand-aqua">
       <header className="bg-white border-b border-border px-4 py-3 flex-shrink-0">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -68,22 +64,29 @@ export default function Survey() {
         </div>
       </header>
 
-      <div className="bg-brand-aqua border-b border-border px-4 py-2 flex-shrink-0">
-        <div className="max-w-6xl mx-auto flex items-center gap-2 text-xs text-muted-foreground">
-          <Info className="h-3.5 w-3.5 text-primary flex-shrink-0" />
-          Complete surveys to earn rewards. Your balance will update
-          automatically after each submission.
+      <div
+        className="flex-1 flex items-center justify-center px-6 py-16"
+        data-ocid="survey.panel"
+      >
+        <div className="text-center max-w-md mx-auto">
+          <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <ClipboardList className="h-12 w-12 text-primary" />
+          </div>
+          <h1 className="text-3xl font-bold text-secondary-foreground mb-3">
+            Coming Soon
+          </h1>
+          <p className="text-muted-foreground text-base mb-8">
+            Surveys will be available after approval
+          </p>
+          <Button
+            size="lg"
+            className="rounded-full bg-primary text-primary-foreground px-10 font-semibold hover:opacity-90 transition-opacity"
+            onClick={() => router.navigate({ to: "/dashboard" })}
+            data-ocid="survey.back_dashboard.primary_button"
+          >
+            Back to Dashboard
+          </Button>
         </div>
-      </div>
-
-      <div className="flex-1 relative" data-ocid="survey.canvas_target">
-        <iframe
-          src={surveyUrl}
-          title="CPX Research Surveys"
-          className="w-full h-full border-0"
-          allow="camera; microphone"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation"
-        />
       </div>
     </div>
   );

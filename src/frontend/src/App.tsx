@@ -5,13 +5,15 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-  redirect,
 } from "@tanstack/react-router";
-import { AuthProvider, useAuth } from "./AuthContext";
+import { AuthProvider } from "./AuthContext";
+import ContactUs from "./pages/ContactUs";
 import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Survey from "./pages/Survey";
+import TermsConditions from "./pages/TermsConditions";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -46,11 +48,32 @@ const surveyRoute = createRoute({
   component: Survey,
 });
 
+const privacyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/privacy-policy",
+  component: PrivacyPolicy,
+});
+
+const termsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/terms",
+  component: TermsConditions,
+});
+
+const contactRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/contact",
+  component: ContactUs,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   loginRoute,
   dashboardRoute,
   surveyRoute,
+  privacyRoute,
+  termsRoute,
+  contactRoute,
 ]);
 
 const router = createRouter({ routeTree });

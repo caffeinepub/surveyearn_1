@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { useRouter } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import { ClipboardList, Loader2, LogOut, Star, TrendingUp } from "lucide-react";
 import { motion } from "motion/react";
 import { useEffect } from "react";
@@ -155,16 +155,45 @@ export default function Dashboard() {
         </div>
       </main>
 
-      <footer className="text-center text-xs text-muted-foreground py-6">
-        &copy; {new Date().getFullYear()}. Built with ❤️ using{" "}
-        <a
-          href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
-          className="text-primary hover:underline"
-          target="_blank"
-          rel="noreferrer"
-        >
-          caffeine.ai
-        </a>
+      <footer className="border-t border-border bg-white py-6 px-6">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-muted-foreground">
+          <span>
+            &copy; {new Date().getFullYear()} SurveyEarn. Built with ❤️ using{" "}
+            <a
+              href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`}
+              className="text-primary hover:underline"
+              target="_blank"
+              rel="noreferrer"
+            >
+              caffeine.ai
+            </a>
+          </span>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/privacy-policy"
+              className="text-primary hover:underline"
+              data-ocid="dashboard.privacy.link"
+            >
+              Privacy Policy
+            </Link>
+            <span>|</span>
+            <Link
+              to="/terms"
+              className="text-primary hover:underline"
+              data-ocid="dashboard.terms.link"
+            >
+              Terms &amp; Conditions
+            </Link>
+            <span>|</span>
+            <Link
+              to="/contact"
+              className="text-primary hover:underline"
+              data-ocid="dashboard.contact.link"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
       </footer>
     </div>
   );
